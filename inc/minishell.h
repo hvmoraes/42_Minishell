@@ -17,7 +17,6 @@
 # include "macros.h"
 # include "structs.h"
 # include "enums.h"
-# include "ft_bool.h"
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -26,9 +25,8 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <linux/limits.h>
 # include <limits.h>
-# include <wait.h>
+# include <sys/wait.h>
 # include <err.h>
 # include <errno.h>
 # include <readline/readline.h>

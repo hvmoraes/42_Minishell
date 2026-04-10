@@ -38,7 +38,6 @@ static void	handle_def_quotes(t_suplex *suplex)
 static void	handle_def_esc(t_suplex *suplex)
 {
 	suplex->tokens->content[suplex->j] = suplex->input[suplex->i];
-	// suplex->i++;
 	suplex->tokens->type = TOKEN;
 	suplex->j++;
 }
@@ -49,21 +48,18 @@ static int	handle_def_term(t_suplex *suplex)
 	if (suplex->j > 0)
 	{
 		suplex->j = 0;
-		/* this ends the previous token and connects it to a new one */
 		suplex->tokens->next = (t_token *)malloc(sizeof(t_token));
 		if (!suplex->tokens->next)
-			return (0);	// TODO: get exit codes and error messages correct
+			return (0);
 		suplex->tokens = suplex->tokens->next;
 		if (!init_token(suplex->tokens, suplex->length))
 			return (0);
 	}
-	/* copy the character to the new token */
 	suplex->tokens->content[0] = suplex->input[suplex->i];
 	suplex->tokens->type = suplex->type;
-	/* create a new token since terminators are individually tokenized */
 	suplex->tokens->next = (t_token *)malloc(sizeof(t_token));
 	if (!suplex->tokens->next)
-		return (0);	// TODO: get exit codes and error messages correct
+		return (0);
 	suplex->tokens = suplex->tokens->next;
 	if (!init_token(suplex->tokens, suplex->length))
 		return (0);
@@ -75,10 +71,9 @@ static int	handle_def_space(t_suplex *suplex)
 	if (suplex->j > 0)
 	{
 		suplex->j = 0;
-		/* spaces when in the default state represent the end of a token */
 		suplex->tokens->next = (t_token *)malloc(sizeof(t_token));
 		if (!suplex->tokens->next)
-			return (0);	// TODO: get exit codes and error messages correct
+			return (0);
 		suplex->tokens = suplex->tokens->next;
 		if (!init_token(suplex->tokens, suplex->length))
 			return (0);

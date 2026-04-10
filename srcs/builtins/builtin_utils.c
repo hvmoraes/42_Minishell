@@ -19,7 +19,7 @@ void	add_builtin(t_built **list, char *cmd, int (*f)(char **))
 
 	new = (t_built *)malloc(sizeof(t_built));
 	if (!new)
-		exit (EXIT_FAILURE);	// TODO: clear up and make exit codes correct
+		exit(EXIT_FAILURE);
 	new->cmd = cmd;
 	new->f = f;
 	new->next = NULL;

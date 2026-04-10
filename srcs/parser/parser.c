@@ -17,7 +17,7 @@ int	parser(t_lexer *lex, t_ast **root)
 	g_data.token = lex->token_list;
 	g_data.ast_root = (t_ast **)ft_calloc(1, sizeof(t_ast *));
 	if (!g_data.ast_root)
-		return (0);	// TODO: cleanup and display error message
+		return (0);
 	*root = cmd_line();
 	return (1);
 }

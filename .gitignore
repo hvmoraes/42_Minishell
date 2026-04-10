@@ -1,0 +1,15 @@
+# Object files
+*.o
+*.d
+build/
+
+# Binary
+minishell
+
+# Libft build artifacts
+lib/*.o
+lib/*.a
+
+# macOS / Linux
+.DS_Store
+.vscode/

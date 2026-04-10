@@ -17,8 +17,8 @@ t_data	g_data;
 
 static void	reset_global(void)
 {
-	g_data.child = FALSE;
-	g_data.expanded = FALSE;
+	g_data.child = false;
+	g_data.expanded = false;
 }
 
 static void	process_input(char *input)
@@ -27,15 +27,12 @@ static void	process_input(char *input)
 	t_ast	*root;
 
 	if (input_is_empty(input))
-	{
-		free(input);
 		return ;
-	}
 	if (lexer(input, &lex) <= 0)
-		return ;	// TODO: free the relevant stuff
+		return ;
 	root = NULL;
 	if (parser(&lex, &root) <= 0)
-		return ;	// TODO: free the relevant stuff
+		return ;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -50,14 +47,14 @@ int	main(int argc, char **argv, char **envp)
 		reset_global();
 		input = read_input();
 		if (!input)
-			exit (EXIT_FAILURE); // TODO: get exit codes correctly and free stuff if needed
+			exit(EXIT_FAILURE);
 		if (ft_strlen(input) <= 0)
 		{
 			free(input);
 			continue ;
 		}
 		if (!input_is_empty(input))
-			add_history(input); // FIXME: shell line is overlapping command, for some reason
+			add_history(input);
 		process_input(input);
 		free(input);
 	}

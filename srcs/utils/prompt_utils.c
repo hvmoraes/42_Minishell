@@ -92,12 +92,17 @@ char	*read_input(void)
 {
 	char	*prompt;
 	char	*line;
+	int		alloc_prompt;
 
 	prompt = get_prompt();
+	alloc_prompt = (prompt != NULL);
 	if (!prompt)
 		prompt = "\033[1;34mminishell\033[0m$ ";
 	line = readline(prompt);
-	free(prompt);
+	if (alloc_prompt)
+		free(prompt);
+	if (!line)
+		return (NULL);
 	prompt = line;
 	line = trim_input(line);
 	free(prompt);

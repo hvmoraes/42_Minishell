@@ -55,7 +55,6 @@ static int	needs_trimming(char *str)
 		check_state(&state, &count, i, str);
 		i++;
 	}
-	// printf("%d\n", count);
 	return (count);
 }
 
@@ -70,7 +69,6 @@ void	trim_str(char *str, char *trimmed)
 	l_quote = 0;
 	i = -1;
 	j = 0;
-	// printf("trimming...\n");
 	while (++i < len)
 	{
 		if (str[i] == '\\' && (str[i + 1] == '\'' || str[i + 1] == '\"'))
@@ -95,18 +93,17 @@ static int trim_quotes(t_token *curr)
 	if (!needs_trimming(curr->content))
 		return (1);
 	trimmed = ft_calloc(ft_strlen(curr->content) + 1, sizeof(char));
-	trim_str(curr->content, trimmed);
 	if (!trimmed)
 		return (0);
+	trim_str(curr->content, trimmed);
 	free(curr->content);
 	curr->content = trimmed;
 	return (1);
 }
 
-static int parse_tokens(t_suptok *suptok, t_token *curr, t_token *prev, t_lexer *lex)
+static int parse_tokens(t_suptok *suptok, t_token *curr, t_token *prev,
+	t_lexer *lex)
 {
-  // int	check;
-
 	suptok->count = 0;
 	suptok->here = 0;
 	suptok->semaphore = 0;
@@ -119,7 +116,7 @@ static int parse_tokens(t_suptok *suptok, t_token *curr, t_token *prev, t_lexer 
 		{
 			handle_expand(suptok->curr);
 			if (!trim_quotes(suptok->curr))
-				return (-1);	// TODO: get exit codes right and free stuff
+			return (-1);
 		}
     	if (suptok->prev && suptok->prev->type == INRED_CHAR &&
 			suptok->curr->type == INRED_CHAR)

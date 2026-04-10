@@ -30,11 +30,11 @@ static t_built	*init_builtins(void)
 static void	init_global(void)
 {
 	g_data.status = EXIT_SUCCESS;
-	g_data.child = FALSE;
-	g_data.expanded = FALSE;
+	g_data.child = false;
+	g_data.expanded = false;
+	g_data.default_fd[READ] = dup(STDIN_FILENO);
+	g_data.default_fd[WRITE] = dup(STDOUT_FILENO);
 	g_data.builtins = init_builtins();
-	dup2(g_data.default_fd[READ], STDIN_FILENO);
-	dup2(g_data.default_fd[WRITE], STDOUT_FILENO);
 }
 
 static void	duplicate_env(char **envp)
@@ -57,7 +57,7 @@ static void	init_env(char **envp)
 
 	g_data.env = (t_list **)ft_calloc(1, sizeof(t_list *));
 	if (!g_data.env)
-		return ;	// TODO: check what to do here
+		return ;
 	duplicate_env(envp);
 	if (list_has_value("SHLVL=", g_data.env))
 	{
@@ -75,5 +75,4 @@ void	init_shell(char **envp)
 {
 	init_global();
 	init_env(envp);
-	// TODO: handle signals function
 }

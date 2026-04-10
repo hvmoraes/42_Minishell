@@ -13,7 +13,7 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include "ft_bool.h"
+# include <stdbool.h>
 
 /*	
 	__token_struct__
@@ -143,8 +143,8 @@ typedef struct s_data
 	t_list	**env;
 	t_built	*builtins;
 
-	t_bool	child;
-	t_bool	expanded;
+	bool	child;
+	bool	expanded;
 
 	t_ast	**ast_root;
 	t_ast	*ast_temp;

@@ -18,7 +18,7 @@ int	init_token(t_token *token, int length)
 {
 	token->content = (char *)ft_calloc((length + 2), sizeof(char));
 	if (!token->content)
-		return (0);	// TODO: make this exit with the right message and error code
+		return (0);
 	token->type = NULL_CHAR;
 	token->next = NULL;
 	return (1);

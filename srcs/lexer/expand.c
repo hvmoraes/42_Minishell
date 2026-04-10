@@ -45,20 +45,25 @@ int	replace_content(t_token *token, t_supexp *supexp)
 		return (0);
 	temp = ft_strjoin(left_side, supexp->new_cont);
 	if (!temp)
+	{
+		free(left_side);
 		return (0);
-	right_side = ft_substr(token->content, supexp->end, ft_strlen(token->content));
+	}
+	right_side = ft_substr(token->content, supexp->end,
+			ft_strlen(token->content));
 	if (!right_side)
+	{
+		free(left_side);
+		free(temp);
 		return (0);
-
-	// Free previous token content
+	}
 	free(token->content);
-
 	token->content = ft_strjoin(temp, right_side);
-	if (!token->content)
-		return (0);
 	free(left_side);
 	free(right_side);
 	free(temp);
+	if (!token->content)
+		return (0);
 	return (1);
 }
 
@@ -77,7 +82,7 @@ static int	expand(t_token *token, t_supexp *supexp, int *i)
 	{
 		supexp->var_name = get_var_name(token, supexp, *i);
 		if (!supexp->var_name)
-			return (0);	// TODO: clean leaks, exit appropriately
+			return (0);
 		supexp->new_cont = ft_strdup(get_env_value(supexp->var_name));
 	}
 	replace_content(token, supexp);

@@ -31,7 +31,8 @@ BUILD_DIR	=	./build
 
 CC			=	gcc
 
-CFLAGS		=	-g -lreadline -Wall -Wextra -Werror
+CFLAGS		=	-g -Wall -Wextra -Werror
+LDFLAGS		=	-lreadline
 LIBFT_FLAGS	=	-L$(LIBFT_DIR) -lft
 
 .o.c:
@@ -45,7 +46,7 @@ $(NAME):	$(BUILD_DIR) $(OBJ)
 	@make -s -C $(LIBFT_DIR)
 	@echo "$(YELLOW)[Libft successfully compiled!]\n$(RESET)"
 	@echo "$(BLUE)Compiling minishell...$(RESET)"
-	@$(CC) $(OBJ) $(CFLAGS) $(LIBFT_FLAGS) -o $(NAME)
+	@$(CC) $(OBJ) $(CFLAGS) $(LDFLAGS) $(LIBFT_FLAGS) -o $(NAME)
 	@mv $(OBJ) $(BUILD_DIR)
 	@printf "$(GREEN)------------------------\n$(RESET)"
 	@printf "$(GREEN_BOLD)[minishell ready to use]\n$(RESET)"
